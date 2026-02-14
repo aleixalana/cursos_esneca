@@ -1,0 +1,40 @@
+/* GLOBAL */
+a {
+        color: #000000;
+        text-decoration: none;
+}
+
+
+/* HEADER */
+#top-header {
+        background-color: #83162b;
+        color: #ffffff;
+}
+#top-header a {
+        color: #ffffff;
+        text-decoration: none;
+}
+
+
+
+/* TAULES */
+.bg-fila-blau {
+        background-color: #f0f8ff;
+}
+
+
+/* ELEMENTS */
+a.btn-esneca, button.btn-esneca {
+        color: #fff;
+        background-color: #83162b;
+        border-color: #83162b;
+}
+a.btn-esneca:hover, button.btn-esneca:hover {
+        color: #83162b;
+        background-color: #ffffff;
+}
+
+.form-control:focus{
+        border-color: #b3b2b2 !important;
+        box-shadow: 0 0 0 .25rem rgb(0 0 0 / 13%) !important;
+}

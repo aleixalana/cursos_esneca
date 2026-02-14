@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{opcio |capitalize }} Curs - Prova Esneca{% endblock %}
+
+{% block body %}
+    <p class="d-flex justify-content-start">
+        <a href="{{path('cursos_inici') }}" class="btn btn-esneca">
+            <i class="fas fa-arrow-left"></i>&nbsp;&nbsp;Tornar
+        </a>
+    </p>
+
+    <h1>{{opcio |capitalize }} curs</h1>
+    
+    
+    {# Mostrar errors (BANDA SERVIDOR) #}
+    {% for missatge in app.flashes('missatge') %}
+        <div class="alert alert-{{ app.flashes('css')[0] }} alert-dismissible fade show" role="alert">
+        {{missatge}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+
+{#
+    {% if errors %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <ul>
+                {% for error in errors %}
+                    <li>{{ error.message }}</li>
+                {% endfor %}
+            </ul>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endif %}
+#}
+
+    <div id="seccio-formulari-curs">
+        {# Rep el codi del formulari en funció de l'opció. El controlador s'encarrega d'elegir el adient #}
+        {# Ruta Formulari AFEGIR: /templates/cursos/formularis/afegir.html.twig #}
+        {# Ruta Formulari EDITAR: /templates/cursos/formularis/editar.html.twig #}
+        {{formulariHtml | raw}}
+    </div>
+
+
+    {% block javascripts %}
+        {{ parent() }}
+        <script>
+        $("#form_afegir").validate({
+            rules: {
+                "cursos_form[nom]": {
+                    required: true,
+                    minlength: 3
+                }
+            },
+            messages: {
+                "cursos_form[nom]": {
+                    required: "El nom és obligatori",
+                    minlength: "El nom ha de tenir almenys 3 caràcters"
+                }
+            }
+        });
+        </script>
+    {% endblock %}
+    
+
+{% endblock %}

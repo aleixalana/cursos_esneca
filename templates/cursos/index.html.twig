@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cursos - Prova Esneca{% endblock %}
+
+{% block body %}
+    <h1>Cursos</h1>
+
+    {# Mostrar errors y missatges de creació correcta (BANDA SERVIDOR) #}
+    {% for missatge in app.flashes('missatge') %}
+        <div class="alert alert-{{ app.flashes('css')[0] }} alert-dismissible fade show" role="alert">
+        {{missatge}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+
+    <p class="d-flex justify-content-end">
+        <a href="{{path('cursos_afegir') }}" class="btn btn-esneca">
+            <i class="fas fa-plus"></i>&nbsp;&nbsp;Crear
+        </a>
+    </p>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Codi</th>
+                    <th>Nom</th>
+                    <th>Data inici</th>
+                    <th>Data Fi</th>
+                    <th>Duració</th>
+                    <th>Preu</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for curs in cursos %}
+                    <tr {% if loop.index is divisible by(2) %} class="bg-fila-blau" {% endif %}>
+                        <td>{{curs.id}}</td>
+                        <td>{{curs.codi}}</td>
+                        <td>{{curs.nom}}</td>
+                        <td>{{curs.dataInici | date("d/m/Y") }}</td>
+                        <td>{{curs.dataFi | date("d/m/Y") }}</td>
+                        <td>{{curs.duracio}}</td>
+                        <td>{{curs.preu}}</td>
+                        <td></td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="8">No hi ha cursos disponibles</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
