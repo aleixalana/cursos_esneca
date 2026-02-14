@@ -22,6 +22,20 @@ a {
         background-color: #f0f8ff;
 }
 
+/* FORMULARI */
+#seccio-formulari-curs {
+        margin-top: 1.5rem;
+        max-width: 500px;
+        margin: 40px auto;
+}
+#seccio-formulari-curs label.error {
+        position: absolute;
+        color: #a95e46;
+        font-size: small;
+        font-weight: 500;
+        margin-left: 2px;
+}
+
 
 /* ELEMENTS */
 a.btn-esneca, button.btn-esneca {

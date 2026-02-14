@@ -8,6 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 
 class CursosFormType extends AbstractType
@@ -28,20 +29,25 @@ class CursosFormType extends AbstractType
                     ],
                     'required' => false, // CAMP NO REQUERIT: Ho desactivem per aquest ejercici per validar-ho nosaltres de forma manual
             ])
-            ->add('data_inici', TextType::class, [
+            ->add('data_inici', DateType::class, [
                     'label'     => 'Data Inici',
                     'help'      => 'Obligatori',
+                    'widget'    => 'single_text',
+                    /*
                     'attr'      => [
                         'placeholder' => 'Introdueix data inici (ex: 13/02/2026)',
-                    ],
+                    ],*/
                     'required' => false, // CAMP NO REQUERIT: Ho desactivem per aquest ejercici per validar-ho nosaltres de forma manual
                 ])
-            ->add('data_fi', TextType::class, [
+            ->add('data_fi', DateType::class, [
                     'label'     => 'Data Inici',
                     'help'      => 'Obligatori',
+                    'widget'    => 'single_text',
+                    /*
                     'attr'      => [
                         'placeholder' => 'Introdueix data inici (ex: 28/02/2026)',
                     ],
+                    */
                     'required' => false, // CAMP NO REQUERIT: Ho desactivem per aquest ejercici per validar-ho nosaltres de forma manual
                 ])
             ->add('duracio', NumberType::class, [

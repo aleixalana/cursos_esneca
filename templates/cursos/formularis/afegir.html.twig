@@ -3,39 +3,51 @@
     {# VALIDACIO DESDE SERVIDOR - mostrar errors #}
     {{ form_errors(formulari_afegir) }}
 
-    <div class="form-group mb-3">
-        {{ form_label(formulari_afegir.nom) }}
+    <div class="form-group mb-4">
+        <div class="d-flex gap-1 mb-1 align-items-center">
+            {{ form_label(formulari_afegir.nom, null, {label_attr: {"class": "m-0"}}) }}
+            {{ form_help(formulari_afegir.nom)}}
+        </div>
         {{ form_widget(formulari_afegir.nom, {"required": true, "attr":{} }) }}
-        {{ form_help(formulari_afegir.nom)}}
     </div>
 
-    <div class="form-group mb-3">
-        {{ form_label(formulari_afegir.data_inici) }}
-        {{ form_widget(formulari_afegir.data_inici, {"required": true, "attr":{"type":"date"} }) }}
-        {{ form_help(formulari_afegir.data_inici) }}
+    <div class="form-group mb-4">
+        <div class="d-flex gap-1 mb-1 align-items-center">
+            {{ form_label(formulari_afegir.data_inici, null, {label_attr: {"class": "m-0"}}) }}
+            {{ form_help(formulari_afegir.data_inici)}}
+        </div>
+        {{ form_widget(formulari_afegir.data_inici, {"required": true, "attr":{} }) }}
     </div>
 
-    <div class="form-group mb-3">
-        {{ form_label(formulari_afegir.data_fi) }}
+    <div class="form-group mb-4">
+        <div class="d-flex gap-1 mb-1 align-items-center">
+            {{ form_label(formulari_afegir.data_fi, null, {label_attr: {"class": "m-0"}}) }}
+            {{ form_help(formulari_afegir.data_fi)}}
+        </div>
         {{ form_widget(formulari_afegir.data_fi, {"required": true, "attr":{} }) }}
-        {{ form_help(formulari_afegir.data_fi) }}
     </div>
 
-    <div class="form-group mb-3">
-        {{ form_label(formulari_afegir.duracio) }}
+    <div class="form-group mb-4">
+        <div class="d-flex gap-1 mb-1 align-items-center">
+            {{ form_label(formulari_afegir.duracio, null, {label_attr: {"class": "m-0"}}) }}
+            {{ form_help(formulari_afegir.duracio)}}
+        </div>
         {{ form_widget(formulari_afegir.duracio, {"required": true, "attr":{} }) }}
-        {{ form_help(formulari_afegir.duracio) }}
     </div>
 
-    <div class="form-group mb-3">
-        {{ form_label(formulari_afegir.preu) }}
+    <div class="form-group mb-4">
+        <div class="d-flex gap-1 mb-1 align-items-center">
+            {{ form_label(formulari_afegir.preu, null, {label_attr: {"class": "m-0"}}) }}
+            {{ form_help(formulari_afegir.preu)}}
+        </div>
         {{ form_widget(formulari_afegir.preu, {"required": true, "attr":{} }) }}
-        {{ form_help(formulari_afegir.preu) }}
     </div>
     
     {# Protecció CSRF - es validará posteriorment al controlador de forma manual  #}
     <input type="hidden" name="tokenAleix" value="{{ csrf_token('curs_token') }}"/>
 
-    <button type="submit" title="enviar" class="btn btn-esneca"><i class="fas fa-check"></i> Guardar</button>
+    <div class="d-flex justify-content-end">
+        <button type="submit" title="enviar" class="btn btn-esneca"><i class="fas fa-check"></i> Guardar</button>
+    </div>
 
 </form>
