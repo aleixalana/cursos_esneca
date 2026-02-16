@@ -71,11 +71,13 @@
         {% endblock %}
 
         {% block javascripts %}
-            <!--<script src="{{ asset('js/jquery-4.0.0.min.js') }}"></script>-->
+            
             <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
             <script src="{{ absolute_url(asset('js/bootstrap.min.js')) }}"></script>
-            <script src="{{ asset('js/jquery.validate.min.js') }}"></script>
+            
+            <script src="{{ asset('js/funcions_global.js') }}"></script>
+            <script src="{{ asset('js/ajax/ajax_functions.js') }}"></script>
             <script type="text/javascript" src="{{ absolute_url(asset('js/sweetalert2.js')) }}"></script>
         {% endblock %}
     </body>

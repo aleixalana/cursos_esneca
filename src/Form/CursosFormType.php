@@ -17,10 +17,14 @@ class CursosFormType extends AbstractType
     {
 
         $builder
-
-            // El codi de curs NO es tracta desde formulari 
-            //->add('codi')
-            
+            ->add('codi', TextType::class, [
+                    'label'     => 'Codi del Curs',
+                    'help'      => 'Obligatori',
+                    'attr'      => [
+                        'placeholder' => 'Introdueix el codi del curs',
+                    ],
+                    'required' => false, // CAMP NO REQUERIT: Ho desactivem per aquest ejercici per validar-ho nosaltres de forma manual
+            ])
             ->add('nom', TextType::class, [
                     'label'     => 'Nom del Curs',
                     'help'      => 'Obligatori',
@@ -83,7 +87,7 @@ class CursosFormType extends AbstractType
         $resolver->setDefaults([
             'csrf_protection' => true,
             'csrf_field_name' => 'tokenAleix', // Sistema de Tokenització CSRF per seguretat
-            'csrf_token_id'   => 'curs_token' //Este valor es el que debemos pasar al parámetro de comprobar
+            'csrf_token_id'   => 'curs_token' // AquestEste valor es el que debemos pasar al parámetro de comprobar
         ]);
     }
 }

@@ -13,44 +13,27 @@
         </div>
     {% endfor %}
 
-    <p class="d-flex justify-content-end">
+    <p class="d-flex justify-content-end gap-1">
         <a href="{{path('cursos_afegir') }}" class="btn btn-esneca">
             <i class="fas fa-plus"></i>&nbsp;&nbsp;Crear
         </a>
+
+        <a href="{{ path('cursos_llistat_AJAX') }}" id="btn-refrescar-llistat" class="btn btn-esneca">
+            <i class="fas fa-sync"></i>&nbsp;&nbsp;Refrescar
+        </a>
     </p>
-    <div class="table-responsive">
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Codi</th>
-                    <th>Nom</th>
-                    <th>Data inici</th>
-                    <th>Data Fi</th>
-                    <th>Duració</th>
-                    <th>Preu</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for curs in cursos %}
-                    <tr {% if loop.index is divisible by(2) %} class="bg-fila-blau" {% endif %}>
-                        <td>{{curs.id}}</td>
-                        <td>{{curs.codi}}</td>
-                        <td>{{curs.nom}}</td>
-                        <td>{{curs.dataInici | date("d/m/Y") }}</td>
-                        <td>{{curs.dataFi | date("d/m/Y") }}</td>
-                        {# s'ha creat un filtre Personalitzat per a mostrar la dada en hores y mitjes hores (src/Twig/DuracioPersonalitzada.php) #}
-                        <td>{{curs.duracio | duracioPersonalitzada}}</td>
-                        <td>{{curs.preu}}<span class="moneda">€</span></td>
-                        <td></td>
-                    </tr>
-                {% else %}
-                    <tr>
-                        <td colspan="8">No hi ha cursos disponibles</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+    {# La taula es pot recerregar desde AJAX #}
+    <div id="seccio-llistat-cursos">
+        {# Per una carrega de la web general, Rep la taula processada amb HTML a través de variable enviada desde el controlador #}
+        {# Ruta Arxiu Processament Taula: /templates/cursos/taulaCursos.html.twig #}
+        {{taulaCursosHtml | raw}}
     </div>
+
+    <a href="{{ path('cursos_suma_hores_AJAX') }}" id="btn-suma-hores-cursos" class="btn btn-esneca">
+        <i class="fas fa-calculator"></i>&nbsp;&nbsp;Calcular Hores
+    </a>
+
+    {# IMPRIMIR HORES Totals dels cursos via AJAX#}
+    <div id="seccio-total-hores"></div>
+
 {% endblock %}

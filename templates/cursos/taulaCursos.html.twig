@@ -1,0 +1,46 @@
+<div class="table-responsive">
+    <table id="taula-cursos" class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Codi</th>
+                <th>Nom</th>
+                <th>Data inici</th>
+                <th>Data Fi</th>
+                <th>Duració</th>
+                <th>Preu</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for curs in cursos %}
+                <tr {% if loop.index is divisible by(2) %} class="bg-fila-blau" {% endif %}>
+                    <td>{{curs.id}}</td>
+                    <td>{{curs.codi}}</td>
+                    <td>{{curs.nom}}</td>
+                    <td>{{curs.dataInici | date("d/m/Y") }}</td>
+                    <td>{{curs.dataFi | date("d/m/Y") }}</td>
+                    {# s'ha creat un filtre Personalitzat per a mostrar la dada en hores y mitjes hores (src/Twig/DuracioPersonalitzada.php) #}
+                    <td>{{curs.duracio | duracioPersonalitzada}}</td>
+                    <td>{{curs.preu}}<span class="moneda">€</span></td>
+                    <td class="text-center">
+                        <a href="{{ path('cursos_editar', {id: curs.id}) }}" class="btn btn-secondary">
+                                <i class="fas fa-edit"></i>&nbsp;Editar
+                        </a>
+                        <a href="javascript:void(0);" class="btn btn-danger" onclick="
+                            confirmarSweet(
+                                'Segur que vols eliminar el curs?',
+                                '{{ path('cursos_eliminar', {id: curs.id}) }}'
+                            )">
+                                <i class="fas fa-trash-alt"></i>&nbsp;Eliminar
+                        </a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="8">No hi ha cursos disponibles</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

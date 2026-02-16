@@ -1,8 +1,13 @@
 <form id="form_afegir" method="POST" action="{{path('cursos_afegir') }}">
 
-    {# VALIDACIO DESDE SERVIDOR - mostrar errors #}
-    {{ form_errors(formulari_afegir) }}
-
+    <div class="form-group mb-4">
+        <div class="d-flex gap-1 mb-1 align-items-center">
+            {{ form_label(formulari_afegir.codi, null, {label_attr: {"class": "m-0"}}) }}
+            {{ form_help(formulari_afegir.codi)}}
+        </div>
+        {{ form_widget(formulari_afegir.codi, {"required": true, "attr":{} }) }}
+    </div>
+    
     <div class="form-group mb-4">
         <div class="d-flex gap-1 mb-1 align-items-center">
             {{ form_label(formulari_afegir.nom, null, {label_attr: {"class": "m-0"}}) }}

@@ -1,0 +1,58 @@
+<form id="form_editar" method="POST" action="{{path('cursos_editar',{id: id}) }}">
+
+    <div class="form-group mb-4">
+        <div class="d-flex gap-1 mb-1 align-items-center">
+            {{ form_label(formulari_editar.codi, null, {label_attr: {"class": "m-0"}}) }}
+            {{ form_help(formulari_editar.codi)}}
+        </div>
+        {{ form_widget(formulari_editar.codi, {"required": true, "attr":{} }) }}
+    </div>
+    
+    <div class="form-group mb-4">
+        <div class="d-flex gap-1 mb-1 align-items-center">
+            {{ form_label(formulari_editar.nom, null, {label_attr: {"class": "m-0"}}) }}
+            {{ form_help(formulari_editar.nom)}}
+        </div>
+        {{ form_widget(formulari_editar.nom, {"required": true, "attr":{} }) }}
+    </div>
+
+    <div class="form-group mb-4">
+        <div class="d-flex gap-1 mb-1 align-items-center">
+            {{ form_label(formulari_editar.data_inici, null, {label_attr: {"class": "m-0"}}) }}
+            {{ form_help(formulari_editar.data_inici)}}
+        </div>
+        {{ form_widget(formulari_editar.data_inici, {"required": true, "attr":{} }) }}
+    </div>
+
+    <div class="form-group mb-4">
+        <div class="d-flex gap-1 mb-1 align-items-center">
+            {{ form_label(formulari_editar.data_fi, null, {label_attr: {"class": "m-0"}}) }}
+            {{ form_help(formulari_editar.data_fi)}}
+        </div>
+        {{ form_widget(formulari_editar.data_fi, {"required": true, "attr":{} }) }}
+    </div>
+
+    <div class="form-group mb-4">
+        <div class="d-flex gap-1 mb-1 align-items-center">
+            {{ form_label(formulari_editar.duracio, null, {label_attr: {"class": "m-0"}}) }}
+            {{ form_help(formulari_editar.duracio)}}
+        </div>
+        {{ form_widget(formulari_editar.duracio, {"required": true, "attr":{} }) }}
+    </div>
+
+    <div class="form-group mb-4">
+        <div class="d-flex gap-1 mb-1 align-items-center">
+            {{ form_label(formulari_editar.preu, null, {label_attr: {"class": "m-0"}}) }}
+            {{ form_help(formulari_editar.preu)}}
+        </div>
+        {{ form_widget(formulari_editar.preu, {"required": true, "attr":{} }) }}
+    </div>
+    
+    {# Protecció CSRF - es validará posteriorment al controlador de forma manual  #}
+    <input type="hidden" name="tokenAleix" value="{{ csrf_token('curs_token') }}"/>
+
+    <div class="d-flex justify-content-end">
+        <button type="submit" title="enviar" class="btn btn-esneca"><i class="fas fa-check"></i> Actualitzar</button>
+    </div>
+
+</form>

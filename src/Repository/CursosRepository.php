@@ -16,6 +16,20 @@ class CursosRepository extends ServiceEntityRepository
         parent::__construct($registry, Cursos::class);
     }
 
+
+    // CALCULAR HORES per consulta
+    public function sumarHoresTotalsCursos(): float
+    {
+        return $this->createQueryBuilder('c')
+            ->select('SUM(c.duracio) as numHores')
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
+
+
+
+
     //    /**
     //     * @return Cursos[] Returns an array of Cursos objects
     //     */
