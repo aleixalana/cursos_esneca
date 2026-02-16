@@ -57,8 +57,8 @@ class CursosFormType extends AbstractType
                     'html5'     => true,
                     'attr'      => [
                         'placeholder'   => 'Introdueix la duració del curs en hores',
-                        'step'          => '0.5', // múltiples de 0.5
-                        'min'           => '0.5', // mínim duració curs
+                        //'step'          => '0.5', // múltiples de 0.5
+                        //'min'           => '0.5', // mínim duració curs
                     ],
                     'required' => false, // CAMP NO REQUERIT: Ho desactivem per aquest ejercici per validar-ho nosaltres de forma manual
                 ])

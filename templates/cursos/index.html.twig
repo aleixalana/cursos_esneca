@@ -40,8 +40,9 @@
                         <td>{{curs.nom}}</td>
                         <td>{{curs.dataInici | date("d/m/Y") }}</td>
                         <td>{{curs.dataFi | date("d/m/Y") }}</td>
-                        <td>{{curs.duracio}}</td>
-                        <td>{{curs.preu}}</td>
+                        {# s'ha creat un filtre Personalitzat per a mostrar la dada en hores y mitjes hores (src/Twig/DuracioPersonalitzada.php) #}
+                        <td>{{curs.duracio | duracioPersonalitzada}}</td>
+                        <td>{{curs.preu}}<span class="moneda">€</span></td>
                         <td></td>
                     </tr>
                 {% else %}

@@ -14,6 +14,7 @@ use App\Entity\Cursos;
 
 use App\Form\CursosFormType;
 
+
 final class CursosController extends AbstractController
 {
     // Injectar el entityManagerInterface al constructor per utilitzar-lo als mètodes
@@ -36,13 +37,35 @@ final class CursosController extends AbstractController
         ]);
     }
 
+    #[Route('/cursos-llistat-ajax', name: 'cursos_llistat_AJAX')]
+    public function mostrarLlistatCursos_AJAX(
+        Request $request
+    ) {
+        if ($request->isXmlHttpRequest()) {
+
+            $dades_cursos = $this->em->getRepository(Cursos::class)->findBy([], ['id' => 'ASC']);
+
+            $response = new JsonResponse(
+                    array(
+                        'message' => 'Success',
+                        'output' => $this->render('action/ListadoTipoAccion.html.twig', [
+                            'cursos' => $dades_cursos,
+                        ])->getContent()
+                    )
+            );
+            return $response;
+
+        } else {
+            throw new \Exception("Anti Hack webmaster");
+        }
+    }
+
     // AFEGIR o EDITAR CURS (Pagina Formulari)
     // Es fa servir la mateixa ruta per donar d'altar i editar cursos seguint les pautes indicades.
     #[Route('/cursos/afegir', name: 'cursos_afegir')]
     public function curs_afegir(Request $request): Response
     {
         
-            
         // Formulari sense vinculació a Entitat Cursos (evitar validació automàtica del FrameWork)
         $form = $this->createForm(CursosFormType::class, null);
             
