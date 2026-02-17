@@ -45,3 +45,13 @@ function confirmarSweet(pregunta, ruta) {
     })
 }
 
+
+$(window).on('scroll', function() {
+    // Al baixar 40px fer la barra sticky (coincideix amb els px de la top-bar)
+    if ($(window).scrollTop() > 40) {
+        $('#header-main').addClass('scroll-fixed-headermain');
+    } else {
+        $('#header-main').removeClass('scroll-fixed-headermain');
+    }
+});
+

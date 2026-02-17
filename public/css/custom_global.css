@@ -14,7 +14,29 @@ a {
         color: #ffffff;
         text-decoration: none;
 }
-
+#header-main-space {
+        min-height: 182px;
+}
+#header-main {
+        margin-top: -182px;
+}
+#header-main.scroll-fixed-headermain {
+        top: 0;
+        margin-top: 0;
+        float: left;
+        width: 100%;
+        display: block;
+        position: fixed;
+        z-index: 999;
+        height: 75px;
+        animation-duration: .5s;
+        animation-name: slidein;
+        box-shadow: 0 4px 4px 0 rgb(0 0 0 / 10%);
+        background: #ffffff;
+}
+#header-main.scroll-fixed-headermain img {
+        width: 130px;
+}
 
 
 /* TAULES */

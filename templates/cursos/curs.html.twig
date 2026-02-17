@@ -46,10 +46,10 @@
         {{ parent() }}
         
         {# Per fer proves de Validació al Servidor
-            TRUE (DESHACTIVA jQuery Validate): Desactiva les validacions del formulari al client (Jquery Validate)
+            TRUE (DESACTIVA jQuery Validate): Desactiva les validacions del formulari al client (Jquery Validate)
             FALSE (ACTIVA jQuery Validate)
         #}
-        {% set debugServerValidation = true %}
+        {% set debugServerValidation = false %}
         {% if not debugServerValidation %}
             <script src="{{ asset('js/jquery.validate.min.js') }}"></script>
             <script src="{{ asset('js/form/validar_form.js') }}"></script>

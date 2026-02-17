@@ -47,6 +47,7 @@ final class CursosController extends AbstractController
     }
 
     // LLISTAR Cursos amb AJAX
+    // Al polsar sobre el botó "Refrescar" de la vista
     #[Route('/cursos-llistat-ajax', name: 'cursos_llistat_AJAX',  methods: ['GET'])]
     public function mostrarLlistatCursos_AJAX(
         Request $request
@@ -92,7 +93,8 @@ final class CursosController extends AbstractController
             }
 
             $dadesForm = $form->getData();
-            // VALIDEM FORMULARI a través d'un servei creat:
+            // VALIDEM FORMULARI desde servidor (en cas de manipulacions malintencionades de codi al FrontEnd)
+            // a través d'un servei creat:
             // src/Form/FormService.php
             $resValidacio = $formService->validar($dadesForm);
 
@@ -125,7 +127,7 @@ final class CursosController extends AbstractController
             $this->em->flush();
             
             $this->addFlash('css', 'success');
-            $this->addFlash('missatge', 'El curs ' . $dadesForm['nom'] . ' s\'ha creat correctament.');
+            $this->addFlash('missatge', $dadesForm['nom'] . ' s\'ha creat correctament');
 
             // TORNAR AL LLISTAT
             return $this->redirectToRoute('cursos_inici');
@@ -161,7 +163,18 @@ final class CursosController extends AbstractController
             throw $this->createNotFoundException('El curs amb ID ' . $id . ' no existeix.');
         }
 
-        $form = $this->createForm(CursosFormType::class, $entity);
+        // PASEM DADES de la entitat Cursos AL FORMULARI PER EDITAR (Reciclem el mateix form)
+        // src/Form/CursosFormType.php
+        $form = $this->createForm(CursosFormType::class, null, [
+            'dades' => [
+                'codi' => $entity->getCodi(),
+                'nom' => $entity->getNom(),
+                'data_inici' => $entity->getDataInici(),
+                'data_fi' => $entity->getDataFi(),
+                'duracio' => $entity->getDuracio(),
+                'preu' => $entity->getPreu()
+            ]
+        ]);
             
         $form->handleRequest($request);
         $tokenEnviat = $request->request->get('tokenAleix');
@@ -181,7 +194,7 @@ final class CursosController extends AbstractController
 
             $dadesForm = $form->getData();
 
-            /***** CUIDADO - ESTA PART FALLA PER QUE HO TRACTEM COM UN ARRAY QUAN EN VERITAT AQUEST FORM ESTÁ ASOCIAT A UNA ENTITAT *** */
+            // VALIDAR FORMULARI EDITAT
             $resValidacio = $formService->validar($dadesForm);
 
             // HI HA ERRORS
@@ -199,10 +212,19 @@ final class CursosController extends AbstractController
                 ]);
             }
 
+            // ACTUALITZAR dades del Curs que estem editant
+            $entity->setCodi($dadesForm['codi']);
+            $entity->setNom($dadesForm['nom']);
+            $entity->setDataInici($dadesForm['data_inici']);
+            $entity->setDataFi($dadesForm['data_fi']);
+            $entity->setDuracio($dadesForm['duracio']);
+            $entity->setPreu($dadesForm['preu']);
+
             $this->em->flush();
             
+
             $this->addFlash('css', 'success');
-            $this->addFlash('missatge', 'El curs ' . $dadesForm['nom'] . ' s\'ha actualitzat correctament.');
+            $this->addFlash('missatge', $dadesForm['nom'] . ' s\'ha actualitzat correctament');
 
             // TORNAR AL LLISTAT
             return $this->redirectToRoute('cursos_inici');$this->em->flush();
@@ -242,7 +264,7 @@ final class CursosController extends AbstractController
         $this->em->flush();
         
         $this->addFlash('css', 'success');
-        $this->addFlash('missatge', $nomCurs . '</strong> eliminat correctament.');
+        $this->addFlash('missatge', $nomCurs . ' eliminat correctament');
 
         return $this->redirectToRoute('cursos_inici');
     }

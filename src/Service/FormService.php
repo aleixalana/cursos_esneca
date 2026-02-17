@@ -64,13 +64,17 @@ class FormService
         if (!isset($dadesForm['preu']) || trim($dadesForm['preu']) === '') {
             $errors['preu'] = "El preu és obligatori";
         } else {
-            $preu = str_replace(',', '.', $dadesForm['preu']);
+            $preu = (float) $dadesForm['preu'];
+            // Normalizar a 2 decimals
+            $preu = number_format($preu, 2, '.', '');
+
             if (!preg_match('/^\d+\.\d{2}$/', $preu)) {
                 $errors['preu'] = "El preu ha de ser amb decimals (ej: 10.55)";
             }
         }
 
-        // ---- FIN ----
+
+        
         if (!empty($errors)) {
             return array(
                 'success' => false,
